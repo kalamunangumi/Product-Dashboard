@@ -2,7 +2,8 @@ import './App.css'
 import { useState } from 'react'
 import {AppBar, Toolbar, IconButton, Typography, Stack, Button} from "@mui/material"
 import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
-import { red } from '@mui/material/colors';
+import Grid from '@mui/material/Grid';
+import { Box } from '@mui/system';
 
 function App() {
 
@@ -53,18 +54,19 @@ function App() {
 
   return (
     <>
-      <AppBar position='static'>
+      <AppBar position='static' >
           <Toolbar>
             <IconButton size='large' edge='start' color='inherit'>
                 <ArrowDropDownCircleIcon/>
             </IconButton>
             <Typography variant='h6'>
-Header            </Typography>
+              Header 
+            </Typography>
 
-            <Stack direction='row' spacing={2} bgcolor={red}>
-              <Button>Police</Button>
-              <Button>Pastor</Button>               
-              <Button>...</Button>
+            <Stack direction='row' spacing={2}>
+              <Button color='red'>Phones</Button>
+              <Button color='red'>Laptops</Button>               
+              <Button color='red'>Printers</Button>
             </Stack>
           </Toolbar>
       </AppBar>
@@ -80,14 +82,18 @@ Header            </Typography>
           </form>
       </div>
 
-      <div className='products'>
+      <div className='products' >
           {products.map((card) => (
-              <div key={card.id}>
-                  <h3>{card.product}</h3>
-                  <p>{card.brand}</p>
-                  <p>{card.location}</p>
-                  <p>{card.price}</p>
-              </div>             
+              <Box sx = {{flexGrow:1}}>
+                  <Grid container spacing={2} >
+                      <Grid key={card.id}  sx={{border: 1, borderRadius: '5%'}} size={{xs:3, md:8}}>
+                      <h3>{card.product}</h3>
+                      <p>{card.brand}</p>
+                      <p>{card.location}</p>
+                      <p>{card.price}</p>
+                </Grid>    
+                  </Grid>
+              </Box>
           ))}          
       </div>
     </>
@@ -95,3 +101,4 @@ Header            </Typography>
 }
 
 export default App
+
