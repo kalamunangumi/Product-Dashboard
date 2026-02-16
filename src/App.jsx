@@ -1,5 +1,8 @@
 import './App.css'
 import { useState } from 'react'
+import {AppBar, Toolbar, IconButton, Typography, Stack, Button} from "@mui/material"
+import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
+import { red } from '@mui/material/colors';
 
 function App() {
 
@@ -13,10 +16,10 @@ function App() {
         {
       id: 3, product: "printer", brand: "lg", location: "local", price: 120,
     },
-        {
+    {
       id: 4, product: "set", brand: "oxford", location: "china", price: 10,
     },
-        {
+    {
       id: 5, product: "usb", brand: "N/A", location: "local", price: 5,
     },    {
       id: 6, product: "notebook", brand: "N/A", location: "local", price: 5,
@@ -50,13 +53,31 @@ function App() {
 
   return (
     <>
+      <AppBar position='static'>
+          <Toolbar>
+            <IconButton size='large' edge='start' color='inherit'>
+                <ArrowDropDownCircleIcon/>
+            </IconButton>
+            <Typography variant='h6'>
+Header            </Typography>
+
+            <Stack direction='row' spacing={2} bgcolor={red}>
+              <Button>Police</Button>
+              <Button>Pastor</Button>               
+              <Button>...</Button>
+            </Stack>
+          </Toolbar>
+      </AppBar>
+
       <h3>Product dashboard</h3>
    
-      <div className=''> 
+      <div className='searchForm'> 
+          <form>
             <label>
-              <input type="text" placeholder='search' onChange={(e) =>  setSearchVal(e.target.value)}/>
+            <input name='search' type="text" placeholder='search' onChange={(e) =>  setSearchVal(e.target.value)}/>
             </label>
             <button onClick={onSearch}>Search product</button>
+          </form>
       </div>
 
       <div className='products'>
