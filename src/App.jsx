@@ -1,10 +1,7 @@
 import './App.css'
-import {Appbar, Toolbar} from "@mui/material"
 import { useState } from 'react'
 
 function App() {
-
-  const [searchProduct, setSearchProduct] = useState(""); 
 
   const cardData = [
     {
@@ -34,8 +31,21 @@ function App() {
     }
   ]
 
-  function onSearch () {
-    return console.log("searching")
+  const [searchVal, setSearchVal] = useState("");
+  const [products, setProducts] = useState(cardData)
+
+  function onSearch (e) {
+    e.preventDefault();
+
+    if (searchVal === "") {
+      setProducts(cardData)
+    }
+
+    const filterBySearch = cardData.filter( (item)=> {
+      if (item.brand.toLowerCase().includes(searchVal.toLocaleLowerCase())) 
+        return item;
+    })
+    setProducts(filterBySearch)
   }
 
   return (
@@ -44,13 +54,13 @@ function App() {
    
       <div className=''> 
             <label>
-              <input type="text" value={searchProduct} placeholder='search' onChange={(e) =>  setSearchProduct(e.target.value)}/>
+              <input type="text" placeholder='search' onChange={(e) =>  setSearchVal(e.target.value)}/>
             </label>
             <button onClick={onSearch}>Search product</button>
       </div>
 
       <div className='products'>
-          {cardData.map((card) => (
+          {products.map((card) => (
               <div key={card.id}>
                   <h3>{card.product}</h3>
                   <p>{card.brand}</p>
